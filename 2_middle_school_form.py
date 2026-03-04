@@ -84,7 +84,7 @@ def create_dynamic_school_record(
     elements.append(Spacer(1, 5 * mm))
 
     # 중학교 전용: 수상경력
-    elements.append(Paragraph("3. Award Records (수상경력)", styles["section"]))
+    elements.append(Paragraph("3. Award Records", styles["section"]))
     award_data = [["Grade", "Date", "Award Name", "Rank", "Conferring Agency"]]
     for aw in data.get("awards", []):
         award_data.append(
@@ -118,7 +118,7 @@ def create_dynamic_school_record(
     # 중학교 전용: 학교폭력
     elements.append(
         Paragraph(
-            "4. Management of School Violence Measures (학교폭력 조치상황 관리)",
+            "4. Management of School Violence Measures",
             styles["section"],
         )
     )
@@ -162,12 +162,8 @@ def create_dynamic_school_record(
     elements.append(Spacer(1, 5 * mm))
 
     # 중학교 전용: 교과학습발달상황 (일반/예체능 분리 및 LayoutError 방지 적용)
-    elements.append(
-        Paragraph(
-            "6. Academic Achievement Status (교과학습발달상황)", styles["section"]
-        )
-    )
-    elements.append(Paragraph("[1학년]", styles["label"]))
+    elements.append(Paragraph("6. Academic Achievement Status", styles["section"]))
+    elements.append(Paragraph("[Grade 1]", styles["label"]))
 
     acad_data = data.get("academic_achievement", {})
 
@@ -176,13 +172,13 @@ def create_dynamic_school_record(
     if std_scores:
         score_data = [
             [
-                "Semester\n(학기)",
-                "Subject Group\n(교과)",
-                "Subject\n(과목)",
-                "Raw Score/Avg\n(원점수/과목평균)",
-                "Achievement\n(성취도)",
-                "Enrollees\n(수강자수)",
-                "Remarks\n(비고)",
+                "Semester",
+                "Subject Group",
+                "Subject",
+                "Raw Score/Avg",
+                "Achievement",
+                "Enrollees",
+                "Remarks",
             ]
         ]
         for sc in std_scores:
@@ -221,8 +217,8 @@ def create_dynamic_school_record(
     if std_remarks:
         rem_data = [
             [
-                "Subject (과목)",
-                "Detailed Skills & Special Notes (세부 능력 및 특기 사항)",
+                "Subject",
+                "Detailed Skills & Special Notes",
             ]
         ]
         rem_style = [
@@ -261,15 +257,17 @@ def create_dynamic_school_record(
     pe_scores = acad_data.get("arts_pe_scores", [])
     pe_remarks = acad_data.get("arts_pe_remarks", "")
     if pe_scores or pe_remarks:
-        elements.append(Paragraph("&lt;체육·예술(음악/미술)&gt;", styles["label"]))
+        elements.append(
+            Paragraph("&lt;Physical Education·Arts(Music/Art)&gt;", styles["label"])
+        )
         if pe_scores:
             pe_data = [
                 [
-                    "Semester\n(학기)",
-                    "Subject Group\n(교과)",
-                    "Subject\n(과목)",
-                    "Achievement\n(성취도)",
-                    "Remarks\n(비고)",
+                    "Semester",
+                    "Subject Group",
+                    "Subject",
+                    "Achievement",
+                    "Remarks",
                 ]
             ]
             for sc in pe_scores:
@@ -302,7 +300,7 @@ def create_dynamic_school_record(
             elements.append(Spacer(1, 5 * mm))
 
         if pe_remarks:
-            pe_rem_data = [["Subject (과목)", "Special Notes (특기 사항)"]]
+            pe_rem_data = [["Subject", "Special Notes"]]
             pe_rem_style = [
                 ("FONTNAME", (0, 0), (-1, -1), "KoreanFont"),
                 ("BOX", (0, 0), (-1, -1), 0.5, colors.black),
@@ -338,9 +336,7 @@ def create_dynamic_school_record(
             elements.append(Spacer(1, 5 * mm))
 
     # 중학교 전용: 자유학기
-    elements.append(
-        Paragraph("7. Free Semester Activities (자유학기활동상황)", styles["section"])
-    )
+    elements.append(Paragraph("7. Free Semester Activities", styles["section"]))
     free_data = [["Grade", "Semester", "Area", "Hours", "Remarks"]]
     for f in data.get("free_semester_activities", []):
         free_data.append(
@@ -374,9 +370,7 @@ def create_dynamic_school_record(
     elements.append(Spacer(1, 5 * mm))
 
     # 중학교 전용: 독서활동상황
-    elements.append(
-        Paragraph("8. Reading Activities (독서활동상황)", styles["section"])
-    )
+    elements.append(Paragraph("8. Reading Activities", styles["section"]))
     read_data = [["Grade", "Subject or Area", "Reading Activity Status"]]
     for r in data.get("reading_activities", []):
         read_data.append(
